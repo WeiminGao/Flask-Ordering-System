@@ -1,0 +1,119 @@
+1. Show delivery men and cooks by store id     * Fixed
+   (paywage, warning, customize cake)
+   seng: weimin resolved, please test again 5/10
+
+2. session CANNOT GET address on safari (only works on chrome)     * Fixed
+   seng: don't use safari during presentation. That's the solution
+
+/login
+1. type in wrong email will cause error *FIXED*
+    now :: input: delivery@example.com which is not in the db,
+           error: File "/Users/caizhuoying/Documents/Flask-Ordering-System/app/routes.py", line 81, in login
+                  elif e.blacklist:
+                  AttributeError: 'NoneType' object has no attribute 'blacklist'
+    ;seng: resolved, please test again
+
+------------------------------------------- Customer ---------------------------------------------
+/cart
+1. different status different price
+    now :: all status use customer price
+    seng: need to wait store id
+    5/8: resolved, please test again
+
+/checkout
+1. allow submit order only if the cart is not empty         *FIXED*
+    now :: allow submit order even if there is nothing in the cart
+    ;seng: resolved, please test again
+2. styling the page (footer)
+
+/customize_cake
+1. styling the page *FIXED*
+2. need to complete *FIXED*
+
+
+/customize_cake (suggestion)        *Fixed
+1. initial amount: 1
+   after changed the amount: 2
+   IF put 1 cake into cart first, and put another 3, the amount should be 3??
+   seng: please test again
+
+1. Main page show history even if not purchased      * Fixed
+   Now: show thing in cart
+   seng: 5/10, please test again
+
+2. Show store id at profile                          * Fixed
+   seng: 5/10, please test again
+
+3. Customize cake does not work                      * Fixed
+   sqlalchemy.exc.IntegrityError: (pymysql.err.IntegrityError) (1048, "Column 'is_cake_drop' cannot be null")
+    seng: resolved, please test again 5/10
+
+************** NEW ***************
+1. Cannot rate                      * Fixed
+   File "/Users/caizhuoying/Documents/Flask-Ordering-System/app/routes.py", line 664, in rating
+    cart.cake.order_made += 1
+    TypeError: unsupported operand type(s) for +=: 'NoneType' and 'int'
+    seng: resolved, please test again
+    * note: when you insert cart tuple, make sure order_made is set to 0
+------------------------------------------- Manager ---------------------------------------------
+/manager/CustomerApplication
+1. approve application individually and add decline option
+   ;seng: resolved, please test again
+
+************** NEW ***************
+2. need to delete/hide application once declined/approved * FIXED *
+   now: the application stays on the page even though its declined/approved.
+   page need to refresh
+
+/manager/ManageCustomers
+1. filter all customers, visitor, customer and vip *FIXED*
+   now: only filter visitor
+
+/manager/order
+1. user address did not show up *FIXED*
+2. assign_order.html needs styling
+
+/manager/PayWage
+1. salary did not save to db *FIXED*
+2. allow input salary individually *FIXED*
+3. start new salary sheet *FIXED*
+
+/manager/CustomerComplain
+1. need to complete *Complete*
+
+/manager/ManageCustomers
+1. need to complete *Complete*
+
+1. Manager did not receive application   *Fixed
+   seng: resolved, please test again 5/10
+
+2. Cannot assign order           * Fixed
+   manager1: when assign order 12
+   flash: You need to assign exactly one deliver
+   seng: resolved, please test again 5/10
+   *Note : manager can assign one delivery to multiple deliver (one to many relation)
+
+
+------------------------------------------- Delivery ---------------------------------------------
+/deliver_rating
+1. deliver_rating.html needs styling
+2. enforce comment if rating < 3
+   ;seng: resolved, please test again
+
+/deliver/notification
+1. need to complete *Complete*
+
+************** NEW ***************
+/delivery/route/<id>
+1. page is fixed, cannot scroll up/down
+Gor: fixed, please test again.
+
+
+------------------------------------------- Cook ---------------------------------------------
+/cook/dropped_notification
+1. need to complete *Complete*
+
+/cook/warning_notification
+1. need to complete *Complete*
+
+1. don't display custom cakes  *Fixed*

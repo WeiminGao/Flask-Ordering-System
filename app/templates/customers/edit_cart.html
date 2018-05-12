@@ -16,22 +16,65 @@
         <form action="{{ url_for('edit_cart') }}" method="POST" class="form-horizontal"
               enctype="multipart/form-data">
             <div class="bodyInner">
-                {% for i in cart %}
-                    <div class="form-group">
-                        <label class="control-label col-md-2">{{ i.cake.cake_name }}</label>
-                        <div class="col-md-10">
-                            <input class="control-label col-md-2" type="number" class="form-control" name="amount{{ i.cake.id }}"
-                                   id="email" value="{{ i.amount }}">
-                            <div class="col-md-2">
-                                <button type="submit" name="action" value="{{ i.cake.id }}" class="btn btn-danger">Drop</button>
-                            </div>
+                {% if current_user.is_authenticated %}
+                    {% for i in cart %}
+                        <div class="form-group">
+                            <label class="control-label col-md-2">{{ i.cake.cake_name }}</label>
+                            <div class="col-md-10">
+                                <input class="control-label col-md-2" type="number" class="form-control"
+                                       name="amount{{ i.cake.id }}"
+                                       id="email" value="{{ i.amount }}">
+                                <div class="col-md-2">
+                                    <button type="submit" name="action" value="{{ i.cake.id }}" class="btn btn-danger">
+                                        Drop
+                                    </button>
+                                </div>
 
+                            </div>
+                            <div class="col-xs-8">
+                                <label style="font-weight: normal">Select cook:</label>
+
+                                <select name="cook{{ i.cake.id }}">
+                                    {% for cook in cooks %}
+                                        <option value="{{ cook.id }}">{{ cook.last_name }},
+                                            {{ cook.first_name }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
                         </div>
-                    </div>
-                {% endfor %}
+                    {% endfor %}
+                {% else %}
+                    {% for i in cart_array %}
+                        <div class="form-group">
+                            <label class="control-label col-md-2">{{ i[2] }}</label>
+                            <div class="col-md-10">
+                                <input class="control-label col-md-2" type="number" class="form-control"
+                                       name="amount{{ i[0] }}"
+                                       id="email" value="{{ i[1] }}">
+                                <div class="col-md-2">
+                                    <button type="submit" name="action" value="{{ i[0] }}" class="btn btn-danger">
+                                        Drop
+                                    </button>
+                                </div>
+                            </div>
+{#                            <div class="col-xs-8">#}
+{#                                <label style="font-weight: normal">Select cook:</label>#}
+{##}
+{#                                <select name="cook{{ i[0] }}">#}
+{#                                    {% for cook in cooks %}#}
+{#                                        <option value="{{ cook.id }}">{{ cook.last_name }},#}
+{#                                            {{ cook.first_name }}</option>#}
+{#                                    {% endfor %}#}
+{#                                </select>#}
+{#                            </div>#}
+                        </div>
+                    {% endfor %}
+                {% endif %}
+
                 <div class="form-group">
                     <div class="col-md-offset-11 col-md-1">
-                        <button type="submit" name="action" value="submit_submit"class="btn btn-primary">Submit</button>
+                        <button type="submit" name="action" value="submit_submit" class="btn btn-primary">Submit
+                        </button>
                     </div>
                 </div>
             </div>

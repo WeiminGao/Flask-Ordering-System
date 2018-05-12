@@ -29,92 +29,55 @@
                     <th class="col-sm-2">Order Number</th>
                     <th class="col-sm-2">Purchase Date</th>
                     <th class="col-sm-3">Order Detail</th>
-                    <th class="col-sm-2"></th>
+                    <th class="col-sm-2">Amount</th>
                     <th class="col-sm-2">Price</th>
+                    <th class="col-sm-2">Checkout Store</th>
                     <th class="col-sm-2">Rate</th>
                 </tr>
                 </thead>
 
                 <tbody>
-                <tr>
-                    <td>Odr2343441</td>
-                    <td>4/1/2018</td>
-                    <td>
-                        <ul>
-                            <li>Green Tea Crepe Cake</li>
-                            <li>Green Tea Crepe Cake</li>
-                            <li>Green Tea Crepe Cake</li>
-                            <li>Green Tea Crepe Cake</li>
-                        </ul>
-                    </td>
-                    <td>
-                        <ul class="quantity">
-                            <li>1</li>
-                            <li>1</li>
-                            <li>1</li>
-                            <li>1</li>
-                        </ul>
-                    </td>
-                    <td>$100</td>
-                    <td>
-                        <a href="rating" target="_blank" class="btn btn-primary" type="button"
-                           aria-pressed="true">Rate</a>
-                    </td>
-                </tr>
 
-                <tr>
-                    <td>Odr2343442</td>
-                    <td>4/2/2018</td>
-                    <td>
-                        <ul>
-                            <li>Green Tea Crepe Cake</li>
-                            <li>Green Tea Crepe Cake</li>
-                            <li>Green Tea Crepe Cake</li>
-                            <li>Green Tea Crepe Cake</li>
-                        </ul>
-                    </td>
-                    <td>
-                        <ul class="quantity">
-                            <li>1</li>
-                            <li>1</li>
-                            <li>1</li>
-                            <li>1</li>
-                        </ul>
-                    </td>
-                    <td>$100</td>
-                    <td>
-                        <a href="rating" target="_blank" class="btn btn-primary" type="button"
-                           aria-pressed="true">Rate</a>
-                    </td>
-                </tr>
+                {% for count in range(counts,0, -1) %}
+                    {% for cart_user in carts %}
+                        {% if cart_user.order_id == count %}
+                            <tr>
+                                <td>{{ cart_user.order_id }}</td>
+                                <td>{{ cart_user.time_submit }}</td>
 
-                <tr>
-                    <td>Odr2343443</td>
-                    <td>4/3/2018</td>
-                    <td>
-                        <ul>
-                            <li>Green Tea Crepe Cake</li>
-                            <li>Green Tea Crepe Cake</li>
-                            <li>Green Tea Crepe Cake</li>
-                            <li>Green Tea Crepe Cake</li>
-                        </ul>
-                    </td>
-                    <td>
-                        <ul class="quantity">
-                            <li>1</li>
-                            <li>1</li>
-                            <li>1</li>
-                            <li>1</li>
-                        </ul>
-                    </td>
-                    <td>$100</td>
-                    <td>
-                        <a href="rating" target="_blank" class="btn btn-primary" type="button"
-                           aria-pressed="true">Rate</a>
-                    </td>
-                </tr>
+                                <td>
+                                    <ul>
+                                        <li>{{ cart_user.cake.cake_name }}</li>
 
+                                    </ul>
+                                </td>
+                                <td>
+                                    <ul class="quantity">
+                                        <li>{{ cart_user.amount }}</li>
 
+                                    </ul>
+                                </td>
+                                <td>
+                                    <ul class="quantity">
+                                        <li>${{ cart_user.amount * cart_user.price }}</li>
+
+                                    </ul>
+                                </td>
+                                <td>
+                                    {{ cart_user.checkout_store }}
+                                </td>
+                                {% if cart_user.status == "Closed" and cart_user.deliver_rating == 0
+                                and cart_user.cake_rating == 0 %}
+                                    <td>
+                                        <a href="{{ url_for('rating',id=cart_user.id) }}"
+                                           class="btn btn-primary" type="button"
+                                           aria-pressed="true">Rate</a>
+                                    </td>
+                                {% endif %}
+                            </tr>
+                        {% endif %}
+                    {% endfor %}
+                {% endfor %}
                 </tbody>
 
             </table>

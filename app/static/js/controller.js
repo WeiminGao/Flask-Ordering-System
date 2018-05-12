@@ -109,6 +109,7 @@ $.extend(Controller, {
         });
 
         View.generateGrid(function() {
+
             Controller.setDefaultStartEndPos();
             Controller.bindEvents();
             Controller.transition(); // transit to the next state (ready)
@@ -122,6 +123,7 @@ $.extend(Controller, {
         return StateMachine.ASYNC;
         // => ready
     },
+
     ondrawWall: function(event, from, to, gridX, gridY) {
         this.setWalkableAt(gridX, gridY, false);
         // => drawingWall
@@ -479,63 +481,7 @@ $.extend(Controller, {
             }
         });
     },
-    /**
-     * When initializing, this method will be called to set the positions
-     * of start node and end node.
-     * It will detect user's display size, and compute the best positions.
-     */
-    setDefaultStartEndPos: function() {
-        var width, height,
-            marginRight, availWidth,
-            centerX, centerY,
-            endX, endY,
-            nodeSize = View.nodeSize;
 
-        width  = $(window).width();
-        height = $(window).height();
-
-        marginRight = $('#algorithm_panel').width();
-        availWidth = width - marginRight;
-
-        centerX = Math.ceil(availWidth / 2 / nodeSize);
-        centerY = Math.floor(height / 2 / nodeSize);
-
-        //this.setStartPos(0, 20);
-        this.setEndPos(20, 0);
-
-        //set default blocks
-        for (height = 0; height < 18; height++) {
-            for (width = 0;  width < 32; width++) {
-                if ((height % 3 !== 0) && (width % 4 !== 0))
-                    this.setWalkableAt(width, height, false);
-            }
-        }
-
-        //Gor: random generate busy conditions
-        for (var value = 0; value < 30; value++) {
-            width = Math.floor((Math.random() * 32) + 0);
-            height = Math.floor((Math.random() * 18) + 0);
-            if ((height % 3 == 0) || (width % 4 == 0))
-                View.setBusyPos(width, height);
-        }
-
-        for (var value = 0; value < 10; value++) {
-            width = Math.floor((Math.random() * 32) + 0);
-            height = Math.floor((Math.random() * 18) + 0);
-            if ((height % 3 == 0) || (width % 4 == 0))
-                this.setWalkableAt(width, height, false);
-        }
-
-
-        View.setStartPosWithoutDeletePrev(1, 10);
-        View.setStartPosWithoutDeletePrev(6, 2);
-        View.setStartPosWithoutDeletePrev(11, 7);
-        //View.setBusyPos(9, 0);
-        //View.setBusyPos(11, 3);
-        //write a function/cond to restrict user choose points that are not default node.
-        this.setStartPos(1, 10);
-
-    },
     
     flushCurrentGreenNodes: function(store) {
         View.flushCurrentGreenNodes(store.x_grid, store.y_grid);

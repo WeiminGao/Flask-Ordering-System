@@ -1,30 +1,34 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <h2>Staff</h2>
-    <form action="{{ url_for('assign_order',id=cart.id) }}" method="POST">
-        <table class="table table-bordered">
-            <thead>
-            <tr>
-                <th>ID</th>
-                <th>Name</th>
-                <th>Position</th>
-                <th>checkbox</th>
-            </tr>
-            </thead>
-            <br>
-            {% for deliver in delivers %}
-                <tr>
-                    <td>{{ deliver.id }}</td>
-                    <td>{{ deliver.last_name }}, {{ deliver.first_name }}</td>
-                    <td>{{ deliver.role.role_type }}</td>
-                    <td><input type="checkbox" name="deliver" value="{{ deliver.id }}"></td>
-                </tr>
-            {% endfor %}
-            </tbody>
-        </table>
-        <div class="col-md-offset-8">
-            <input type="submit" value="Assign" class="btn btn-success">
+    <div class="container">
+        <h2>Staff</h2>
+        <div class="bodyInner">
+            <form action="{{ url_for('assign_order',id=cart.id) }}" method="POST">
+                <table class="table table-bordered">
+                    <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Position</th>
+                        <th>Select</th>
+                    </tr>
+                    </thead>
+                    <br>
+                    {% for deliver in delivers %}
+                        <tr>
+                            <td>{{ deliver.id }}</td>
+                            <td>{{ deliver.last_name }}, {{ deliver.first_name }}</td>
+                            <td>{{ deliver.role.role_type }}</td>
+                            <td><input type="radio" name="deliver" value="{{ deliver.id }}"></td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+                <div class="col-md-offset-8">
+                    <input type="submit" value="Assign" class="btn btn-success" style="float: right">
+                </div>
+            </form>
         </div>
-    </form>
+    </div>
 {% endblock %}

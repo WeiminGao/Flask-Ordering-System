@@ -1,99 +1,128 @@
 {% extends "base.html" %}
 
 {% block content %}
-<head>
-    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <script src="{{url_for('static', filename='themes/assets/js/ie8-responsive-file-warning.js')}}" ></script>
-    <link href="{{url_for('static', filename='themes/dist/css/bootstrap.min.css')}}" rel="stylesheet">
-    <link href="{{url_for('static', filename='themes/assets/css/carousel.css')}}" rel="stylesheet">
-</head>
+    <head>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <script src="{{ url_for('static', filename='themes/assets/js/ie8-responsive-file-warning.js') }}"></script>
+        <link href="{{ url_for('static', filename='themes/dist/css/bootstrap.min.css') }}" rel="stylesheet">
+        <link href="{{ url_for('static', filename='themes/assets/css/carousel.css') }}" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/customerComplaint.css') }}">
+    </head>
 
-<!-- NAVBAR
-================================================== -->
+    <!-- NAVBAR
+    ================================================== -->
 
 
 
-<div class="pageTitle">
-	<div class="container">
-		<h2>Customer Complaint</h2>
-	</div>
-</div>
+    <!--body-->
+    <div class="container" style="min-height: 70vh">
+        <h2>Customer Complaint</h2>
+        <div class="bodyInner">
+            <div class="row">
+                <!--Links Table-->
+                <div class="col-lg-2">
+                    <div class="table-responsive">
+                        <table class="table table-bordered">
+                            <tbody>
+                            <tr>
+                                <td><a href="{{ url_for('application') }}" style="color:black">Customer Application</a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><a href="{{ url_for('complaint') }}" style="color:black"><strong>Customer
+                                    Complaint</strong></a></td>
+                            </tr>
+                            <tr>
+                                <td><a href="{{ url_for('deliverwarning') }}" style="color:black">Delivery Men
+                                    Warning</a></td>
+                            </tr>
+                            <tr>
+                                <td><a href="{{ url_for('cookwarning') }}" style="color:black">CookWarning</a></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="col-md-10">
+                    <form action="{{ url_for('complaint') }}" method="POST" class="form-horizontal"
+                          enctype="multipart/form-data">
+                        <div class="table-responsive">
+                            <p><strong>{{ message }}</strong></p>
+                            <table class="table table-striped">
+                                <thead>
+                                <tr>
+                                    <th>Order#</th>
+                                    <th>Customer Name</th>
+                                    <th>Store</th>
+                                    <th>Delivery man</th>
+                                    <th>Cakes</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for i in all_complaints %}
+                                    <tr>
+                                        <td>
+                                            <div>{{ i.order_id }}</div>
+                                            <br>
+                                            <p>Time: {{ i.time_submit }}</p>
+                                            <p>Cook ID: {{ i.cook_id }}</p>
+                                            <p>Delivery ID: {{ i.deliver_id }}</p>
+                                        </td>
+                                        <td>
+                                            <div>{{ i.user.first_name }} {{ i.user.last_name }}</div>
+                                            <br>
+                                            <p>Id:{{ i.user_id }}</p>
+                                            <p>Email: {{ i.user.email }}</p>
+                                        </td>
+                                        <td>
+                        <pre>
+Rate: {{ i.store_rating }}
+Comments: {{ i.store_comments }}
+                        </pre>
+                                        </td>
+                                        <td>
+                        <pre>
+Rate: {{ i.deliver_rating }}
+Comments: {{ i.deliver_comments }}
+                        </pre>
+                                        </td>
+                                        <td>
+                        <pre>
+{{ i.cake.cake_name }} (rate:{{ i.cake_rating }})
+Comments:{{ i.cake_comments }}
+                        </pre>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
 
-<br><br>
-<!--body-->
-<div class="container">
-	<div class="row">
-		<!--Links Table-->
-		<div class="col-lg-2">
-			<div class ="table-responsive">
-			<table class="table table-bordered">
-				<tbody>
-				<tr>
-					<td><a href="{{ url_for('application')}}" style="color:black">Customer Application</a></td>
-				</tr>
-				<tr>
-					<td><a href="{{ url_for('complaint')}}" style="color:black"><strong>Customer Complaint</strong></a></td>
-				</tr>
-                <tr>
-					<td><a href="{{ url_for('deliverwarning')}}" style="color:black">Delivery Men Warning</a></td>
-				</tr>
-				<tr>
-					<td><a href="{{ url_for('cookwarning')}}" style="color:black">CookWarning</a></td>
-				</tr>
-				</tbody>
-			</table>
-			</div>
-		</div>
-        <div class="col-lg-10">
-			<div class ="table-responsive">
-			<table class="table table-bordered">
-				<thead>
-				<tr>
-					<th>Complain ID</th>
-                    <th>Customer Name</th>
-                    <th>Order#</th>
-                    <th>Cook ID</th>
-                    <th>Deliver Man ID/th>
-                    <th>Detail</th>
-				</tr>
-				</thead>
-                <tbody>
-				<tr>
-					<td>link?</td>
-                    <td><a href="ManageCustomers.html#id1234" style="color:black">link</a></td>
-                    <td>/</td>
-                    <td>/</td>
-                    <td>/</td>
-                    <td>/</td>
-				</tr>
-				<tr>
-					<td>link?</td>
-                    <td>link</td>
-                    <td>/</td>
-                    <td>/</td>
-                    <td>/</td>
-                    <td>/</td>
-				</tr>
-				</tbody>
-			</table>
-			</div>
-		</div>
+                                <div class="form-group">
+                                    <div class="col-md-2" style="float: right">
+                                        <button type="submit" class="btn btn-primary">Show All</button>
+                                    </div>
+                                </div>
+
+                            </table>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
-</div>
 
 
-      <!-- FOOTER -->
-      <footer>
-		<div class="container">
-        <p class="pull-right"><a href="#">Back to top</a></p>
-        <p>&copy; 2018 Company, Inc. &middot; <a href="#">Privacy</a> &middot; <a href="#">Terms</a></p>
-		</div>
-      </footer>
+    <!-- FOOTER -->
+    <footer>
+        <div class="container">
+            <p class="pull-right"><a href="#">Back to top</a></p>
+            <p>&copy; 2018 Company, Inc. &middot; <a href="#">Privacy</a> &middot; <a href="#">Terms</a></p>
+        </div>
+    </footer>
 
     <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
-    <script src="{{url_for('static', filename='themes/dist/js/bootstrap.min.js')}}" ></script>
-    <script src="{{url_for('static', filename='themes/assets/js/holder.js')}}" ></script>
+    <script src="{{ url_for('static', filename='themes/dist/js/bootstrap.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='themes/assets/js/holder.js') }}"></script>
 
 
 {% endblock %}

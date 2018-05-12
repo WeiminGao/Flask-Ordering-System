@@ -2,29 +2,36 @@
 
 {% block content %}
 
-    <div class="row">
-    <form action="{{ url_for("deliver_rating", id=cart.id) }}" id="form1" method="POST">
-        <div class="col-md-offset-5">
-            <h3>Please rate this Customer: {{ cart.user.id }}</h3>
-            <h3>{{ cart.user.last_name }}, {{ cart.user.first_name }}</h3>
-            <div class="form-group" >
-                <label for="rate">Select (select one):</label>
-                <select form="form1" class="form-control" name='rate_list'id="rate" style="width: 130px" ;>
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5">5</option>
-                </select>
-            </div>
-            <div class="form-group col-md-6">
-                <label for="comment">Comment:</label>
-                <textarea form="form1" class="form-control" rows="3" name="comments"></textarea>
+    <div class="container">
+
+        <div class="bodyInner">
+            <div class="row col-md-offset-3">
+                <form action="{{ url_for("deliver_rating", id=cart.id) }}" id="form1" method="POST">
+                    <h3>Order ID: {{ cart.order_id }}</h3>
+                    <h3>Please rate this Customer: {{ cart.user_id }}</h3>
+                    <h3>Name: {{ cart.user.last_name }}, {{ cart.user.first_name }}</h3>
+                    <br>
+                    <div class="row">
+                        <div class="form-group col-md-3">
+                            <label for="rate">Select (select one):</label>
+                            <select form="form1" class="form-control" name='rate_list' id="rate" style="width: 130px" ;>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="comment">Comment:</label>
+                            <textarea form="form1" class="form-control" rows="3" name="comments"></textarea>
+                        </div>
+                    </div>
+                    <br>
+                    <input type="submit" class="btn btn-primary" style="float: right">
+                </form>
             </div>
         </div>
-
-            <input type="submit" class="btn btn-primary"></input>
-        </form>
     </div>
 
 

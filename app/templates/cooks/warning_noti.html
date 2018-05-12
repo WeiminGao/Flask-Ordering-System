@@ -11,8 +11,9 @@
     </head>
 
     <!--body-->
-    <div class="container">
+    <div class="container" style="min-height: 70vh">
         <h2>Warning</h2>
+        <p><strong>Now you received {{ cook.number_of_warning }} warning(s)</strong></p>
         <div class="bodyInner">
             <div class="row">
                 <!--Links Table-->
@@ -30,6 +31,8 @@
                         </table>
                     </div>
                 </div>
+                <form action="{{ url_for('warning_notification')}}" method="POST" class="form-horizontal"
+                      enctype="multipart/form-data">
                 <div class="col-lg-10">
                     <div class="table-responsive">
                         <table class="table table-bordered">
@@ -37,33 +40,22 @@
                             <tr>
                                 <th class="col-xs-2">Date</th>
                                 <th class="col-xs-7">Message</th>
+                                <th></th>
                             </tr>
                             </thead>
                             <tbody>
+                            {% for warning in warnings %}
                             <tr>
-                                <td>4/11/2018</td>
-                                <td>(Cake) received 3 drops, which count as 1 warning, you received total of (#
-                                    warnings)
-                                    warning(s)
-                                </td>
+                                <td>{{ warning.time_submit }}</td>
+                                <td>{{ warning.cake.cake_name}} received 2nd drops, which count as 1 warning, now you received {{ warning.user.number_of_warning }} warning(s)</td>
+                                <td><button type="submit" name="delete" value="{{ warning.id }}" class="btn btn-danger">Delete</button></td>
                             </tr>
-                            <tr>
-                                <td>4/13/2018</td>
-                                <td>(Cake) received 3 drops, which count as 1 warning, you received total of (#
-                                    warnings)
-                                    warning(s)
-                                </td>
-                            </tr>
+                            {% endfor %}
                             </tbody>
                         </table>
                     </div>
                 </div>
-
-                <div class="form-group">
-                    <div class="col-md-offset-11 col-md-1">
-                        <button type="button" class="btn btn-primary">Delete</button>
-                    </div>
-                </div>
+                </form>
             </div>
         </div>
     </div>

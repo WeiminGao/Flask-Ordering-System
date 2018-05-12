@@ -1,90 +1,96 @@
 {% extends "base.html" %}
 
 {% block content %}
-<head>
-    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <script src="{{url_for('static', filename='themes/assets/js/ie8-responsive-file-warning.js')}}" ></script>
-    <link href="{{url_for('static', filename='themes/dist/css/bootstrap.min.css')}}" rel="stylesheet">
-    <link href="{{url_for('static', filename='themes/assets/css/carousel.css')}}" rel="stylesheet">
-</head>
+    <head>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <script src="{{ url_for('static', filename='themes/assets/js/ie8-responsive-file-warning.js') }}"></script>
+        <link href="{{ url_for('static', filename='themes/dist/css/bootstrap.min.css') }}" rel="stylesheet">
+        <link href="{{ url_for('static', filename='themes/assets/css/carousel.css') }}" rel="stylesheet">
+    </head>
 
-<!-- NAVBAR
-================================================== -->
+    <!-- NAVBAR
+    ================================================== -->
 
 
-<div class="pageTitle">
-	<div class="container">
-		<h2>Deliver Men Warning</h2>
-	</div>
-</div>
 
-<br><br>
-<!--body-->
-<div class="container">
-	<div class="row">
-		<!--Links Table-->
-		<div class="col-lg-2">
-			<div class ="table-responsive">
-			<table class="table table-bordered">
-				<tbody>
-				<tr>
-					<td><a href="{{ url_for('application')}}" style="color:black">Customer Application</a></td>
-				</tr>
-				<tr>
-					<td><a href="{{ url_for('complaint')}}" style="color:black">Customer Complaint</a></td>
-				</tr>
-                <tr>
-					<td><a href="{{ url_for('deliverwarning')}}" style="color:black"><strong>Delivery Men Warning</strong></a></td>
-				</tr>
-				<tr>
-					<td><a href="{{ url_for('cookwarning')}}" style="color:black">CookWarning</a></td>
-				</tr>
-				</tbody>
-			</table>
-			</div>
-		</div>
-        <div class="col-lg-10">
-			<div class ="table-responsive">
-			<table class="table table-bordered">
-				<thead>
-				<tr>
-					<th>Delivery Man ID</th>
-                    <th>Delivery Man Name</th>
-                    <th># Warning(s)</th>
-                    <th></th>
-				</tr>
-				</thead>
-                <tbody>
-				<tr>
-					<td>/</td>
-                    <td>/</td>
-                    <td>/</td>
-                    <td><input type="submit" class="btn btn-info" value="Erase"></td>
-				</tr>
-				<tr>
-					<td>/</td>
-                    <td>/</td>
-                    <td>/</td>
-                    <td><input type="submit" class="btn btn-info" value="Erase"></td>
-				</tr>
-				</tbody>
-			</table>
-			</div>
-		</div>
+    <!--body-->
+    <div class="container" style="min-height: 70vh">
+        <h2>Deliver Men Warning</h2>
+        <div class="bodyInner">
+            <form action="{{ url_for('deliverwarning') }}" method="POST" class="form-horizontal"
+                  enctype="multipart/form-data">
+                <div class="row">
+                    <!--Links Table-->
+                    <div class="col-lg-2">
+                        <div class="table-responsive">
+                            <table class="table table-bordered">
+                                <tbody>
+                                <tr>
+                                    <td><a href="{{ url_for('application') }}" style="color:black">Customer
+                                        Application</a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><a href="{{ url_for('complaint') }}" style="color:black">Customer Complaint</a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><a href="{{ url_for('deliverwarning') }}" style="color:black"><strong>Delivery
+                                        Men
+                                        Warning</strong></a></td>
+                                </tr>
+                                <tr>
+                                    <td><a href="{{ url_for('cookwarning') }}" style="color:black">CookWarning</a></td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="col-lg-10">
+                        <div class="table-responsive">
+                            <table class="table table-bordered">
+                                <thead>
+                                <tr>
+                                    <th>Delivery Man ID</th>
+                                    <th>Delivery Man Name</th>
+                                    <th># Warning(s)</th>
+                                    <th></th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for i in delivery %}
+                                    <tr>
+                                        <td>{{ i.id }}</td>
+                                        <td>{{ i.first_name }} {{ i.last_name }}</td>
+                                        <td>{{ i.number_of_warning }}</td>
+                                        <td>
+                                            <button type="submit" name="erase" value="{{ i.id }}"
+                                                    class="btn btn-danger">
+                                                Erase
+                                            </button>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
     </div>
-</div>
 
 
-      <!-- FOOTER -->
-      <footer>
-		<div class="container">
-        <p class="pull-right"><a href="#">Back to top</a></p>
-        <p>&copy; 2018 Company, Inc. &middot; <a href="#">Privacy</a> &middot; <a href="#">Terms</a></p>
-		</div>
-      </footer>
+    <!-- FOOTER -->
+    <footer>
+        <div class="container">
+            <p class="pull-right"><a href="#">Back to top</a></p>
+            <p>&copy; 2018 Company, Inc. &middot; <a href="#">Privacy</a> &middot; <a href="#">Terms</a></p>
+        </div>
+    </footer>
 
     <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
-    <script src="{{url_for('static', filename='themes/dist/js/bootstrap.min.js')}}" ></script>
-    <script src="{{url_for('static', filename='themes/assets/js/holder.js')}}" ></script>
+    <script src="{{ url_for('static', filename='themes/dist/js/bootstrap.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='themes/assets/js/holder.js') }}"></script>
 {% endblock %}

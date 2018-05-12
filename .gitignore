@@ -4,6 +4,7 @@ __pycache__/
 *$py.class
 .pyc
 .idea
+__init__.py
 
 # Mac 
 .DS_Store

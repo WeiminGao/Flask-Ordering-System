@@ -16,81 +16,82 @@
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 </head>
 <body>
-<div class="header">
-    <div class="header-right">
-        {% if current_user.role_id == 7 and current_user.is_authenticated %}
-            <a href="{{ url_for('manager',id=current_user.id) }}" class="logo"><img
-                    src="http://homecookingadventure.com/images/recipes/Chocolate_Mirror_Cake_main.jpg" alt="logo"
-                    style="width:60px;height:60px;border:0;"></a>
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <ul class="nav navbar-nav navbar-left">
+            {% if current_user.role_id == 7 and current_user.is_authenticated %}
+                <li><a href="{{ url_for('manager',id=current_user.id) }}" class="logo"><img
+                        src="http://homecookingadventure.com/images/recipes/Chocolate_Mirror_Cake_main.jpg" alt="logo"
+                        style="width:60px;height:60px;border:0;"></a></li>
 
-        {% elif current_user.role_id == 6 and current_user.is_authenticated %}
-            <a href="{{ url_for('cook') }}" class="logo"><img
-                    src="http://homecookingadventure.com/images/recipes/Chocolate_Mirror_Cake_main.jpg" alt="logo"
-                    style="width:60px;height:60px;border:0;"></a>
+            {% elif current_user.role_id == 6 and current_user.is_authenticated %}
+                <li><a href="{{ url_for('cook') }}" class="logo"><img
+                        src="http://homecookingadventure.com/images/recipes/Chocolate_Mirror_Cake_main.jpg" alt="logo"
+                        style="width:60px;height:60px;border:0;"></a></li>
 
-        {% elif current_user.role_id == 5 and current_user.is_authenticated %}
-            <a href="{{ url_for('deliver') }}" class="logo"><img
-                    src="http://homecookingadventure.com/images/recipes/Chocolate_Mirror_Cake_main.jpg" alt="logo"
-                    style="width:60px;height:60px;border:0;"></a>
+            {% elif current_user.role_id == 5 and current_user.is_authenticated %}
+                <li><a href="{{ url_for('deliver') }}" class="logo"><img
+                        src="http://homecookingadventure.com/images/recipes/Chocolate_Mirror_Cake_main.jpg" alt="logo"
+                        style="width:60px;height:60px;border:0;"></a></li>
 
-        {% else %}
-            <a href="{{ url_for('index') }}" class="logo"><img
-                    src="http://homecookingadventure.com/images/recipes/Chocolate_Mirror_Cake_main.jpg" alt="logo"
-                    style="width:60px;height:60px;border:0;"></a>
+            {% else %}
+                <li><a href="{{ url_for('index') }}" class="logo"><img
+                        src="http://homecookingadventure.com/images/recipes/Chocolate_Mirror_Cake_main.jpg" alt="logo"
+                        style="width:60px;height:60px;border:0;"></a></li>
 
-        {% endif %}
+            {% endif %}
+            <li>{{ session['store_address'] }}</li>
+        </ul>
 
-        {% if current_user.is_anonymous or current_user.role_id == 1 or current_user.role_id == 3 or current_user.role_id == 4 %}
-            <a href="{{ url_for('menu') }}">Menu</a>
-            <a href="{{ url_for('cart') }}">Cart</a>
-        {% endif %}
+        <ul class="nav navbar-nav navbar-right">
+            {% if current_user.is_anonymous or current_user.role_id == 1 or current_user.role_id == 3 or current_user.role_id == 4 %}
+                <li><a href="{{ url_for('menu') }}">Menu</a></li>
+                <li><a href="{{ url_for('cart') }}">Cart</a></li>
+            {% endif %}
 
-        {% if current_user.role_id == 5 and current_user.is_authenticated %}
-            <a href="{{ url_for('deliver') }}">Deliver</a>
-            <a href="{{ url_for('deliver_profile',id=current_user.id) }}">Deliver Profile</a>
-            <a href="{{ url_for('delivery_route') }}">Delivery Route</a>
-            <a href="{{ url_for('deliver_notification') }}">Deliver Notification</a>
+            {% if current_user.role_id == 5 and current_user.is_authenticated %}
+                <li><a href="{{ url_for('deliver') }}">Deliver</a></li>
+                <li><a href="{{ url_for('deliver_profile',id=current_user.id) }}">Deliver Profile</a></li>
+                <li><a href="{{ url_for('deliver_notification') }}">Deliver Notification</a></li>
 
-        {% elif current_user.role_id == 7 and current_user.is_authenticated %}
-            <a href="{{ url_for('cookwarning') }}">CookWarning</a>
-            <a href="{{ url_for('application') }}">Customer Approval</a>
-            <a href="{{ url_for('order') }}">Order</a>
-            <a href="{{ url_for('deliverwarning') }}">Deliver Warning</a>
-            <a href="{{ url_for('managecustomers') }}">Manage Customer</a>
-            <a href="{{ url_for('paywage') }}">Paywage</a>
-            <a href="{{ url_for('complaint') }}">Customer Complaint</a>
+            {% elif current_user.role_id == 7 and current_user.is_authenticated %}
+                <li><a href="{{ url_for('cookwarning') }}">CookWarning</a></li>
+                <li><a href="{{ url_for('application') }}">Customer Approval</a></li>
+                <li><a href="{{ url_for('order') }}">Order</a></li>
+                <li><a href="{{ url_for('deliverwarning') }}">Deliver Warning</a></li>
+                <li><a href="{{ url_for('managecustomers') }}">Manage Customer</a></li>
+                <li><a href="{{ url_for('paywage') }}">Paywage</a></li>
+                <li><a href="{{ url_for('complaint') }}">Customer Complaint</a></li>
 
-        {% elif current_user.role_id == 6 and current_user.is_authenticated %}
-            <a href="{{ url_for('cook_profile',id=current_user.id) }}">Cook Profile</a>
-            <a href="{{ url_for('additem') }}">Add Item</a>
-            <a href="{{ url_for('dropped_notification') }}">Dropped Notification</a>
-            <a href="{{ url_for('warning_notification') }}">Warning Notification</a>
+            {% elif current_user.role_id == 6 and current_user.is_authenticated %}
+                <li><a href="{{ url_for('cook_profile',id=current_user.id) }}">Cook Profile</a></li>
+                <li><a href="{{ url_for('additem') }}">Add Item</a></li>
+                <li><a href="{{ url_for('dropped_notification') }}">Dropped Notification</a></li>
+                <li><a href="{{ url_for('warning_notification') }}">Warning Notification</a></li>
 
-        {% elif (current_user.role_id == 1 or current_user.role_id == 3 or current_user.role_id == 4) and current_user.is_authenticated %}
-            <a href="{{ url_for('checkout') }}">Checkout</a>
-            <a href="{{ url_for('customer_profile',id=current_user.id) }}">Customer Profile</a>
-            <a href="{{ url_for('order_history') }}">Customer Order History</a>
-            <a href="{{ url_for('rating') }}">Customer Rating</a>
-        {% else %}
+            {% elif (current_user.role_id == 1 or current_user.role_id == 3 or current_user.role_id == 4) and current_user.is_authenticated %}
+                <li><a href="{{ url_for('customer_profile',id=current_user.id) }}">Customer Profile</a></li>
+                <li><a href="{{ url_for('order_history') }}">Customer Order History</a></li>
+            {% else %}
 
-            <a href="{{ url_for('registration') }}">Registration</a>
-            <a href="{{ url_for('login') }}">Login</a>
-        {% endif %}
+                <li><a href="{{ url_for('registration') }}">Registration</a></li>
+                <li><a href="{{ url_for('login') }}">Login</a></li>
+            {% endif %}
 
-        {% if current_user.is_authenticated %}
+            {% if current_user.is_authenticated %}
 
-            <a href="{{ url_for('logout') }}">Logout</a>
+                <li><a href="{{ url_for('logout') }}">Logout</a></li>
 
-        {% endif %}
+            {% endif %}
+        </ul>
     </div>
-</div>
+</nav>
 
-<hr>
 {% with messages = get_flashed_messages() %}
     {% if messages %}
-        <ul>
+        <ul style="padding-left: 120px">
             {% for message in messages %}
-                <li>
+                <li style="font-weight: bold">
                     {{ message }}
                 </li>
 

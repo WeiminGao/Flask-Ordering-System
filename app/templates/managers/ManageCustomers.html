@@ -1,66 +1,77 @@
 {% extends "base.html" %}
 
 {% block content %}
-<head>
-    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <script src="{{url_for('static', filename='themes/assets/js/ie8-responsive-file-warning.js')}}" ></script>
-    <link href="{{url_for('static', filename='themes/dist/css/bootstrap.min.css')}}" rel="stylesheet">
-    <link href="{{url_for('static', filename='themes/assets/css/carousel.css')}}" rel="stylesheet">
+    <head>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <script src="{{ url_for('static', filename='themes/assets/js/ie8-responsive-file-warning.js') }}"></script>
+        <link href="{{ url_for('static', filename='themes/dist/css/bootstrap.min.css') }}" rel="stylesheet">
+        <link href="{{ url_for('static', filename='themes/assets/css/carousel.css') }}" rel="stylesheet">
 
-</head>
+    </head>
 
-<!-- NAVBAR
-================================================== -->
+    <!-- NAVBAR
+    ================================================== -->
 
-<!--body-->
-<div class="pageTitle">
-	<div class="container">
-		<h2 style="text-align:center;">Registered Customers</h2>
-	</div>
-</div>
+    <!--body-->
+    <div class="container" style="min-height: 70vh">
+        <h2>Registered Customers</h2>
 
-<br><br>
-<!--Registered customers table-->
-<div class="container" style="min-height: 30vh">
-    <div class ="table-responsive">
-    <table class="table table-striped">
-        <thead>
-        <tr>
-            <th>Customer ID</th>
-            <th>Customer Name</th>
-            <th>Telephone Number</th>
-            <th>Email</th>
-            <th>Address</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr>
-            <td name="id1234">1234</td>
-            <td>Example</td>
-            <td>/</td>
-            <td>/</td>
-            <td>/</td>
-        </tr>
-        <tr>
-            <td>5678</td>
-            <td>Example2</td>
-            <td>/</td>
-            <td>/</td>
-            <td>/</td>
-        </tr>
-        </tbody>
-    </table>
+        <p style="text-align: center; color:red;"><strong>{{ message }}</strong></p>
+
+        <div class="bodyInner">
+            <a href="{{ url_for('managecustomers') }}" style="color: deepskyblue; font-weight: bold">Back</a>
+
+            <form action="{{ url_for('managecustomers') }}" method="POST">
+                <div style="float: right">
+                    <label><input type="search" class="form-control" id="name" name="customer_name"
+                                  placeholder="First_name Last_name"></label>
+                    <input type="submit" class="btn btn-info" value="Search">
+                </div>
+            </form>
+            <br>
+        </div>
+
+        <!--Registered customers table-->
+        <div class="container" style="min-height: 35vh">
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th class="col-sm-2">Customer ID</th>
+                        <th class="col-sm-2">Customer Name</th>
+                        <th class="col-sm-1">Photo ID</th>
+                        <th class="col-sm-3">Email</th>
+                        <th class="col-sm-1">Address</th>
+                        <th class="col-sm-2">Store ID (VIP)</th>
+                        <th class="col-sm-1">Blacklist</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for customer in customers %}
+                        <tr>
+                            <td>{{ customer.id }}</td>
+                            <td>{{ customer.first_name }} {{ customer.last_name }}</td>
+                            <td><a style="color: black" target="_blank"
+                                   href={{ url_for('uploaded_file', filename=customer.email+'.png') }}>ID</a></td>
+                            <td>{{ customer.email }}</td>
+                            <td>{{ customer.address }}</td>
+                            <td>{{ customer.vip_store_id }}</td>
+                            <td>{{ customer.blacklist }}</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
-</div>
-
-      <!-- FOOTER -->
-      <footer>
-		<div class="container">
-        <p class="pull-right"><a href="#">Back to top</a></p>
-        <p>&copy; 2018 Company, Inc. &middot; <a href="#">Privacy</a> &middot; <a href="#">Terms</a></p>
-		</div>
-      </footer>
+    <!-- FOOTER -->
+    <footer>
+        <div class="container">
+            <p class="pull-right"><a href="#">Back to top</a></p>
+            <p>&copy; 2018 Company, Inc. &middot; <a href="#">Privacy</a> &middot; <a href="#">Terms</a></p>
+        </div>
+    </footer>
 
 
 
@@ -68,6 +79,6 @@
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
-    <script src="{{url_for('static', filename='themes/dist/js/bootstrap.min.js')}}" ></script>
-    <script src="{{url_for('static', filename='themes/assets/js/holder.js')}}" ></script>
+    <script src="{{ url_for('static', filename='themes/dist/js/bootstrap.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='themes/assets/js/holder.js') }}"></script>
 {% endblock %}

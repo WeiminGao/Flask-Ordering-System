@@ -11,12 +11,24 @@
     <div class="col-25">
         <div class="container"><h4>Cart <span class="price" style="color:black"><i
                 class="fa fa-shopping-cart"></i></span></h4>
-            {% for list in cart %}
-                <p><a href="{{ url_for('description', id=list.cake_id) }}">{{ list.cake.cake_name }}</a> <span
-                        class="price">{{ list.cook.first_name }}, {{ list.amount }}, {{ list.price }}</span></p>
-            {% endfor %}
-            <hr>
-            <p>Total <span class="price" style="color:black"><b>{{ total }}</b></span></p>
+            {% if current_user.is_authenticated %}
+                {% for list in cart %}
+                    <p><a href="{{ url_for('description', id=list.cake_id) }}">{{ list.cake.cake_name }}</a> <span
+                            class="price">{{ list.cook.first_name }}, {{ list.amount }}, {{ list.price }}</span></p>
+                {% endfor %}
+                <hr>
+                <p>Total <span class="price" style="color:black"><b>{{ total }}</b></span></p>
+            {% else %}
+                {% for i in cart_array %}
+                         <p><a href="{{ url_for('description', id=i[0]) }}">{{ i[3] }}</a> <span
+                            class="price">{{ i[4] }}, {{ i[1] }}, {{ i[5] }}</span></p>
+
+                {% endfor %}
+                 <hr>
+                <p>Total <span class="price" style="color:black"><b>{{ total }}</b></span></p>
+
+            {% endif %}
+
             <a href="{{ url_for('menu') }}">Back</a>
             <div class="submitBottom" style="float: right; color: deepskyblue;">
                 <a href="{{ url_for("edit_cart") }}" style="color: deepskyblue;">Edit</a>

@@ -14,8 +14,9 @@
 
 
     <!--body-->
-    <div class="container">
+    <div class="container" style="min-height: 70vh">
         <h2>Drop</h2>
+        <p><strong>Now you received {{ cook.number_of_drop }} drop(s)</strong></p>
         <div class="bodyInner">
             <div class="row">
                 <!--Links Table-->
@@ -33,6 +34,8 @@
                         </table>
                     </div>
                 </div>
+                <form action="{{ url_for('dropped_notification')}}" method="POST" class="form-horizontal"
+                      enctype="multipart/form-data">
                 <div class="col-md-10">
                     <div class="table-responsive">
                         <table class="table table-bordered">
@@ -40,28 +43,23 @@
                             <tr>
                                 <th class="col-xs-2">Date</th>
                                 <th class="col-xs-7">Message</th>
+                                <th></th>
                             </tr>
                             </thead>
 
                             <tbody>
+                            {% for dropped_cake in dropped_cakes %}
                             <tr>
-                                <td>4/11/2018</td>
-                                <td>(Cake) dropped once, you received (# drop) drop(s) for this cake</td>
+                                <td>{{ dropped_cake.time_submit }}</td>
+                                <td>{{ dropped_cake.cake.cake_name}} dropped once, now you received {{ dropped_cake.user.number_of_drop }} drop(s)</td>
+                                <td><button type="submit" name="delete" value="{{ dropped_cake.id }}" class="btn btn-danger">Delete</button></td>
                             </tr>
-                            <tr>
-                                <td>4/13/2018</td>
-                                <td>(Cake) dropped once, you received (# drop) drop(s) for this cake</td>
-                            </tr>
+                            {% endfor %}
                             </tbody>
                         </table>
                     </div>
                 </div>
-
-                <div class="form-group">
-                    <div class="col-md-offset-11 col-md-1">
-                        <button type="button" class="btn btn-primary">Delete</button>
-                    </div>
-                </div>
+                </form>
             </div>
         </div>
     </div>

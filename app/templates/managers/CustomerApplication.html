@@ -13,46 +13,44 @@
     <!-- NAVBAR
     ================================================== -->
 
-
-    <div class="pageTitle">
-        <div class="container">
-            <h2>Customers Application</h2>
-        </div>
-    </div>
-
-    <br><br>
     <!--body-->
-    <div class="container" style="min-height: 30vh">
-        <div class="row">
-            <!--Links Table-->
-        </div>
+    <div class="container" style="min-height: 70vh">
+        <h2>Customers Application</h2>
+        <div class="bodyInner">
+            <div class="row">
+                <!--Links Table-->
+            </div>
 
-        <div class="table-responsive" style="width: 700px; margin: auto">
-            <table class="table table-bordered">
-                <tr>
-                    <th>Customer ID</th>
-                    <th>Customer Name</th>
-                    <!-- <th>Photo ID</th> -->
-                    <th>Email</th>
-                    <th>Address</th>
-                </tr>
-
-                {% for user in me %}
+            <div class="table-responsive" style="width: 700px; margin: auto">
+                <table class="table table-bordered">
                     <tr>
-                        <td>{{ user.id }}</td>
-                        <td>{{ user.first_name }}{{ user.last_name }}</td>
-                        <td>{{ user.email }}</td>
-                        <td>{{ user.address }}</td>
+                        <th class="col-sm-1">Customer ID</th>
+                        <th class="col-sm-2">Customer Name</th>
+                        <th class="col-sm-2">Photo ID</th>
+                        <th class="col-sm-2">Email</th>
+                        <th class="col-sm-1">Address</th>
+                        <th class="col-sm-2">Approve</th>
+                        <th class="col-sm-2">Denial</th>
                     </tr>
-                {% endfor %}
-
-
-            </table>
+                    <form action="{{ url_for('application') }}" method="POST">
+                        {% for user in me %}
+                            <tr>
+                                <td>{{ user.id }}</td>
+                                <td>{{ user.first_name }} {{ user.last_name }}</td>
+                                <td><a style="color: black" target="_blank"
+                                       href={{ url_for('uploaded_file', filename=user.email+'.png') }}>ID</a></td>
+                                <td>{{ user.email }}</td>
+                                <td>{{ user.address }}</td>
+                                <td style="text-align: center"><input type="submit" name="approve" value="{{ user.id }}"
+                                                                      class="btn btn-success" value="Approve"></td>
+                                <td style="text-align: center"><input type="submit" name="decline" value="{{ user.id }}" class="btn btn-danger"
+                                           value="Approve"></td>
+                            </tr>
+                        {% endfor %}
+                    </form>
+                </table>
+            </div>
         </div>
-        <!-- button -->
-        <form action="{{ url_for('application') }}" method="post">
-            <input type="submit" name="change" class="btn btn-info" style="float: right" value="Submit">
-        </form>
     </div>
 
 

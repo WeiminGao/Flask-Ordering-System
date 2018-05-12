@@ -11,15 +11,9 @@
 
 
     </head>
-    <!-- NAVBAR
-    ================================================== -->
 
-    <div class="pageTitle">
-    <div class="container">
+    <div class="container" style="min-height: 70vh">
         <h2>Welcome {{ title }} </h2>
-    </div>
-
-    <div class="container">
         <div class="bodyInner">
             <table id="delivery" class="table table-striped">
                 <thead>
@@ -37,11 +31,11 @@
                 <tbody>
                 {% for cart in logs %}
                     <tr>
-                        <td>{{ cart.id }}</td>
+                        <td>{{ cart.order_id }}</td>
                         <td>{{ cart.user.last_name }}, {{ cart.user.first_name }}</td>
-                        <td>{{ cart.user.address }}</td>
+                        <td>{{ cart.checkout_address }}</td>
                         <td>
-                            <a href="route.html" target="_blank" class="btn btn-primary" type="button"
+                            <a href="{{ url_for('delivery_route', id=cart.id) }}" target="_blank" class="btn btn-primary" type="button"
                                aria-pressed="true">Show
                                 Route</a>
                         </td>

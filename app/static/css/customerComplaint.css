@@ -1,0 +1,6 @@
+td p{
+    display:none;
+}
+td:hover p{
+    display:block;
+}

@@ -20,14 +20,8 @@
 
 
     <!--body-->
-    <div class="pageTitle">
-        <div class="container">
-            <h2 style="text-align:center;">Assign Orders</h2>
-        </div>
-    </div>
-
-    <br><br>
-    <div class="container" style="min-height: 30vh">
+    <div class="container" style="min-height: 70vh">
+    <h2>Assign Orders</h2>
         <div class="bodyInner">
             <!--List of Orders Table-->
 
@@ -46,9 +40,9 @@
                     <tbody>
                     {% for cart in carts %}
                         <tr>
-                            <td>{{ cart.id }}</td>
+                            <td>{{ cart.order_id }}</td>
                             <td>{{ cart.user.last_name }}, {{ cart.user.first_name }}</td>
-                            <td>{{ cart.address }}</td>
+                            <td>{{ cart.checkout_address }}</td>
                             <td>{{ cart.cake.cake_name }}</td>
                             <td>{{ cart.amount }}</td>
                             <td class="col-md-2">
@@ -57,31 +51,9 @@
                                 </a>
                             </td>
                         </tr>
-<<<<<<< HEAD
-                        </thead>
-                        <tbody>
-                        {% for cart in carts %}
-                            <tr>
-                                <td>{{ cart.order_id }}</td>
-                                <td>{{ cart.user.last_name }}, {{ cart.user.first_name }}</td>
-                                <td>{{ cart.address }}</td>
-                                <td>{{ cart.cake.cake_name }}</td>
-                                <td>{{ cart.amount }}</td>
-                                <td class="col-md-2">
-                                    <a href="{{ url_for('assign_order',id=cart.id) }}" class="btn btn-primary">
-                                        assign
-                                    </a>
-                                </td>
-                            </tr>
-                        {% endfor %}
-                        </tbody>
-                    </table>
-                </div>
-=======
                     {% endfor %}
                     </tbody>
                 </table>
->>>>>>> 0552204177a32bfd49d6bc07b409b42aa94b9f9d
             </div>
             <!--Delivery Table-->
 

@@ -12,133 +12,133 @@
 
     <div class="container">
         <div class="bodyInner">
-            <div class="submitBottom" style="float: right;">
-                <button type="button" class="btn btn-primary">Submit</button>
-            </div>
-
             <br><br>
 
             <div class="profile" style="width: 700px; margin: auto">
-                <table id="storeRate" class="table" style="width: 700px;">
-                    <thead>
-                    <tr>
-                        <th class="col-sm-2">Store Rating</th>
-                        <th class="col-sm-2">Comment</th>
-                    </tr>
-                    </thead>
+                <form action="{{ url_for('rating',id = cart.id) }}" id="form" method="POST">
+                    <table id="storeRate" class="table" style="width: 700px;">
+                        <thead>
+                        <tr>
+                            <th class="col-sm-2">Store Rating: Store {{ cart.cook.store_id }}</th>
+                            <th class="col-sm-2">Comment</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>
+                                <label class="radio-inline">
+                                    <input type="radio" name="store_rating" value="1">1
+                                </label>
+                                <label class="radio-inline">
+                                    <input type="radio" name="store_rating" value="2">2
+                                </label>
+                                <label class="radio-inline">
+                                    <input type="radio" name="store_rating" value="3">3
+                                </label>
+                                <label class="radio-inline">
+                                    <input type="radio" name="store_rating" value="4">4
+                                </label>
+                                <label class="radio-inline">
+                                    <input type="radio" name="store_rating" value="5">5
+                                </label>
 
-                    <tbody>
-                    <tr>
-                        <td>
-                            <form>
-                                <label class="radio-inline">
-                                    <input type="radio" name="optradio">1
-                                </label>
-                                <label class="radio-inline">
-                                    <input type="radio" name="optradio">2
-                                </label>
-                                <label class="radio-inline">
-                                    <input type="radio" name="optradio">3
-                                </label>
-                                <label class="radio-inline">
-                                    <input type="radio" name="optradio">4
-                                </label>
-                                <label class="radio-inline">
-                                    <input type="radio" name="optradio">5
-                                </label>
-                            </form>
-                        </td>
-                        <td>
-                            <form>
+                            </td>
+                            <td>
                                 <div class="form-group">
-                                    <textarea class="form-control" rows="5" id="comment"></textarea>
+                                        <textarea name="store_comments" class="form-control" rows="5" form="form"
+                                                  id="comment"></textarea>
                                 </div>
-                            </form>
-                        </td>
-                    </tr>
-                    </tbody>
-                </table>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
 
-                <table id="cakeRate" class="table" style="width: 700px;">
-                    <thead>
-                    <tr>
-                        <th class="col-sm-2">Cake Rating</th>
-                        <th class="col-sm-2">Comment</th>
-                    </tr>
-                    </thead>
+                    <table id="cakeRate" class="table" style="width: 700px;">
+                        <thead>
+                        <tr>
+                            <th class="col-sm-2">Cake Rating: {{ cart.cake.cake_name }}</th>
+                            <th class="col-sm-2">Comment</th>
+                        </tr>
+                        </thead>
 
-                    <tbody>
-                    <tr>
-                        <td>
-                            <form>
+                        <tbody>
+                        <tr>
+                            <td>
+
                                 <label class="radio-inline">
-                                    <input type="radio" name="optradio">1
+                                    <input type="radio" name="cake_rating" value="1">1
                                 </label>
                                 <label class="radio-inline">
-                                    <input type="radio" name="optradio">2
+                                    <input type="radio" name="cake_rating" value="2">2
                                 </label>
                                 <label class="radio-inline">
-                                    <input type="radio" name="optradio">3
+                                    <input type="radio" name="cake_rating" value="3">3
                                 </label>
                                 <label class="radio-inline">
-                                    <input type="radio" name="optradio">4
+                                    <input type="radio" name="cake_rating" value="4">4
                                 </label>
                                 <label class="radio-inline">
-                                    <input type="radio" name="optradio">5
+                                    <input type="radio" name="cake_rating" value="5">5
                                 </label>
-                            </form>
-                        </td>
-                        <td>
-                            <form>
+
+                            </td>
+                            <td>
+
                                 <div class="form-group">
-                                    <textarea class="form-control" rows="5" id="comment"></textarea>
+                                    <textarea name="cake_comments" form="form" class="form-control" rows="5"
+                                              id="comment"></textarea>
                                 </div>
-                            </form>
-                        </td>
-                    </tr>
-                    </tbody>
-                </table>
 
-                <table id="deliveryRate" class="table" style="width: 700px;">
-                    <thead>
-                    <tr>
-                        <th class="col-sm-2">Delivery Rating</th>
-                        <th class="col-sm-2">Comment</th>
-                    </tr>
-                    </thead>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
 
-                    <tbody>
-                    <tr>
-                        <td>
-                            <form>
+                    <table id="deliveryRate" class="table" style="width: 700px;">
+                        <thead>
+                        <tr>
+                            <th class="col-sm-2">Delivery
+                                Rating: {{ cart.deliver.last_name }}, {{ cart.deliver.first_name }} </th>
+                            <th class="col-sm-2">Comment</th>
+                        </tr>
+                        </thead>
+
+                        <tbody>
+                        <tr>
+                            <td>
+
                                 <label class="radio-inline">
-                                    <input type="radio" name="optradio">1
+                                    <input type="radio" name="deliver_rating" value="1">1
                                 </label>
                                 <label class="radio-inline">
-                                    <input type="radio" name="optradio">2
+                                    <input type="radio" name="deliver_rating" value="2">2
                                 </label>
                                 <label class="radio-inline">
-                                    <input type="radio" name="optradio">3
+                                    <input type="radio" name="deliver_rating" value="3">3
                                 </label>
                                 <label class="radio-inline">
-                                    <input type="radio" name="optradio">4
+                                    <input type="radio" name="deliver_rating" value="4">4
                                 </label>
                                 <label class="radio-inline">
-                                    <input type="radio" name="optradio">5
+                                    <input type="radio" name="deliver_rating" value="5">5
                                 </label>
-                            </form>
-                        </td>
-                        <td>
-                            <form>
+
+                            </td>
+                            <td>
+
                                 <div class="form-group">
-                                    <textarea class="form-control" rows="5" id="comment"></textarea>
+                                    <textarea form="form" name="deliver_comments" class="form-control" rows="5"
+                                              id="comment"></textarea>
                                 </div>
-                            </form>
-                        </td>
-                    </tr>
-                    </tbody>
-                </table>
 
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <div class="submitBottom" style="float: right;">
+                        <input type="submit" class="btn btn-primary">
+                    </div>
+                </form>
             </div>
         </div>
     </div>

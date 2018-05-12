@@ -16,7 +16,7 @@
     <div class="container">
         <h2>Create an Account</h2>
 
-        <form action="{{ url_for('registration') }}" method="post" enctype="multipart/form-data">
+        <form action="{{ url_for('registration') }}" method="POST" enctype="multipart/form-data">
             <div class="bodyInner">
                 <div class="information" style="width: 900px; margin: auto">
                     <h3>Personal Information</h3>
@@ -24,32 +24,16 @@
                     <div class="row">
                         <div class="personalInfo">
                             <div class="form-row">
-                                <div class="form-group col-md-5">
+                                <div class="form-group col-md-6">
                                     <label for="firstName">First Name</label>
                                     <input type="text" class="form-control" name="firstname" id="firstname" required>
                                 </div>
 
-                                <div class="form-group col-md-5">
+                                <div class="form-group col-md-6">
                                     <label for="lastName">Last Name</label>
                                     <input type="text" class="form-control" name="lastname" id="lastname" required>
                                 </div>
                             </div>
-
-                            <div class="form-group col-md-2">
-                                <label for="gender">Gender</label>
-                                <select id="gender" name="gender" class="form-control" required>
-                                    <option selected>Choose...</option>
-                                    <option>Female</option>
-                                    <option>Male</option>
-                                </select>
-                            </div>
-                        </div>
-
-                        <div class="form-group col-md-12">
-                            <label for="inputAddress">Address</label>
-                            <input type="text" class="form-control" name="address1" id="inputAddress"
-                                   placeholder="(1,3)"
-                                   required>
                         </div>
 
                         <div class="col-md-12">

@@ -1,76 +1,87 @@
 {% extends "base.html" %}
 
 {% block content %}
-<head>
-    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <script src="{{url_for('static', filename='themes/assets/js/ie8-responsive-file-warning.js')}}" ></script>
-    <link href="{{url_for('static', filename='themes/dist/css/bootstrap.min.css')}}" rel="stylesheet">
-    <link href="{{url_for('static', filename='themes/assets/css/carousel.css')}}" rel="stylesheet">
+    <head>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <script src="{{ url_for('static', filename='themes/assets/js/ie8-responsive-file-warning.js') }}"></script>
+        <link href="{{ url_for('static', filename='themes/dist/css/bootstrap.min.css') }}" rel="stylesheet">
+        <link href="{{ url_for('static', filename='themes/assets/css/carousel.css') }}" rel="stylesheet">
 
-</head>
-
-<!-- NAVBAR
-================================================== -->
+    </head>
 
 
-<!--body-->
-<div class="pageTitle">
-	<div class="container">
-		<h2 style="text-align:center;">Employees Salary Information</h2>
-	</div>
-</div>
 
-<br><br>
-<!--Employees Salary Information table-->
-<div class="container">
-	<form>
-    <div class ="table-responsive">
-    <table class="table table-striped">
-        <thead>
-        <tr>
-            <th>Employee ID</th>
-            <th>Employee Name</th>
-            <th>Position</th>
-            <th>Hour</th>
-            <th>Rate</th>
-            <th>Total Salary</th>
-			<th>Select</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr>
-            <td>/</td>
-            <td>/</td>
-            <td>Cooker/Deli.men</td>
-            <td>/</td>
-            <td>/</td>
-            <td>/</td>
-			<td><label><input type="checkbox" value=""></label></td>
-        </tr>
-        <tr>
-            <td>/</td>
-            <td>/</td>
-            <td>/</td>
-            <td>/</td>
-            <td>/</td>
-            <td>/</td>
-			<td><label><input type="checkbox" value=""></label></td>
-        </tr>
-        </tbody>
-    </table>
+    <!--Employees Salary Information table-->
+    <div class="container" style="min-height: 70vh">
+        <h2>Employees Salary Information</h2>
+        <div class="bodyInner">
+            <form action="{{ url_for('paywage') }}" method="POST" class="form-horizontal"
+                  enctype="multipart/form-data">
+                <div class="form-group, table-responsive">
+
+                    <div class="form-group">
+                        <div class="col-md-offset-10 col-md-2">
+                            <button type="submit" name="action" value="new_sheet" class="btn btn-success">New Salary
+                                Sheet
+                            </button>
+                        </div>
+                    </div>
+
+                    <br>
+
+                    <table class="table table-striped">
+                        <thead>
+                        <tr>
+                            <th class="col-sm-2">Employee ID</th>
+                            <th class="col-sm-2">Employee Name</th>
+                            <th class="col-sm-2">Position</th>
+                            <th class="col-sm-2">Hour</th>
+                            <th class="col-sm-2">Rate</th>
+                            <th class="col-sm-2">Total Salary</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for list in delivery %}
+                            <tr>
+                                <td>{{ list.id }}</td>
+                                <td>{{ list.first_name }} {{ list.last_name }}</td>
+                                <td>{{ list.role }}</td>
+                                <td><input type="text" class="form-control" id="hrs" name="hours{{ list.id }}"></td>
+                                <td>{{ delivery_salary_rate }}</td>
+                                <td>{{ list.salary }}</td>
+                            </tr>
+                        {% endfor %}
+
+                        {% for list in cook %}
+                            <tr>
+                                <td>{{ list.id }}</td>
+                                <td>{{ list.first_name }} {{ list.last_name }}</td>
+                                <td>{{ list.role }}</td>
+                                <td><input type="text" class="form-control" id="hrs" name="hours{{ list.id }}"></td>
+                                <td>{{ cook_salary_rate }}</td>
+                                <td>{{ list.salary }}</td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                    <div class="form-group">
+                        <div class="col-md-offset-11 col-md-1">
+                            <button type="submit" name="action" value="submit_hours" class="btn btn-primary">Submit
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
     </div>
-	</form>
-<!-- Submit Button -->
-	<input type="submit" class="btn btn-info" style="float: right" value="Submit">
-</div>
-      <!-- FOOTER -->
-      <footer>
-		<div class="container">
-        <p class="pull-right"><a href="#">Back to top</a></p>
-        <p>&copy; 2018 Company, Inc. &middot; <a href="#">Privacy</a> &middot; <a href="#">Terms</a></p>
-		</div>
-      </footer>
+    <!-- FOOTER -->
+    <footer>
+        <div class="container">
+            <p class="pull-right"><a href="#">Back to top</a></p>
+            <p>&copy; 2018 Company, Inc. &middot; <a href="#">Privacy</a> &middot; <a href="#">Terms</a></p>
+        </div>
+    </footer>
 
 
 
@@ -78,6 +89,6 @@
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
-    <script src="{{url_for('static', filename='themes/dist/js/bootstrap.min.js')}}" ></script>
-    <script src="{{url_for('static', filename='themes/assets/js/holder.js')}}" ></script>
+    <script src="{{ url_for('static', filename='themes/dist/js/bootstrap.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='themes/assets/js/holder.js') }}"></script>
 {% endblock %}
